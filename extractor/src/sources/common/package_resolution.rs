@@ -88,7 +88,7 @@ pub fn populate_package_registry(
         let package_meta = PackageMeta {
             thunk_name: PackageName(package_name.clone()),
             true_name: true_name.to_owned(),
-            wally_complaint_name: true_name.to_case(Case::Kebab),
+            wally_compliant_name: true_name.to_case(Case::Kebab),
             version,
             dependencies: dependencies.into_keys().collect::<Vec<PackageName>>(),
             dependency_thunk_names,

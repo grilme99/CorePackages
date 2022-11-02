@@ -33,7 +33,7 @@ pub struct PackageMeta {
     /// True name of the package, found inside the `lock.toml`.
     pub true_name: String,
     /// Version of `true_name` but Wally compliant.
-    pub wally_complaint_name: String,
+    pub wally_compliant_name: String,
     /// Version of the package, as found in the `lock.toml` file.
     pub version: Version,
     /// Reference to all dependencies this package defines.

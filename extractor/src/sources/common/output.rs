@@ -79,7 +79,7 @@ fn write_wally_file(
                     thunk_name.to_owned(),
                     format!(
                         "core-packages/{}@{}",
-                        package.wally_complaint_name,
+                        package.wally_compliant_name,
                         package.version.to_string()
                     ),
                 )
@@ -90,7 +90,7 @@ fn write_wally_file(
     let wally_file = WallyConfig {
         dependencies: package_dependencies,
         package: WallyConfigPackage {
-            name: format!("core-packages/{}", package_meta.wally_complaint_name),
+            name: format!("core-packages/{}", package_meta.wally_compliant_name),
             description: "https://github.com/grilme99/CorePackages".into(),
             version: package_meta.version.to_string(),
             authors: vec!["Roblox Corporation".into()],
@@ -110,7 +110,7 @@ fn write_wally_file(
 
 fn write_project_file(path: &PathBuf, package_meta: &PackageMeta) -> anyhow::Result<()> {
     let project = json!({
-        "name": package_meta.wally_complaint_name,
+        "name": package_meta.wally_compliant_name,
         "tree": {
             "$path": "src/"
         }
