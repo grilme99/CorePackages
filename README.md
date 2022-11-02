@@ -18,8 +18,6 @@ This project comes in two parts:
 1. An [`extractor/`](/extractor/) for extracting any CorePackage and its dependencies from Roblox's CorePackages.
 2. The [`modules/`](/modules/) available by default on Wally (under the `core-packages` scope). Everything in this repository is properly licensed (see below) under appropriate open-source licenses that enable use in your projects.
 
-The extractor in its current state is pretty cobbled together, with a few dependency resolution bugs. I plan to improve its implementation when I find the time.
-
 ## Motivation
 
 Roblox has fantastic internal packages, and they're going MIT (or Apache2)!
