@@ -21,12 +21,16 @@ pub fn populate_package_registry(
     package_registry: &mut PackageRegistry,
     packages_path: &PathBuf,
 ) -> anyhow::Result<()> {
-    let files = get_lua_files_in_path(packages_path)
+    let mut packages_files = get_lua_files_in_path(packages_path)
         .context("Failed to get Lua files in Packages directory")?;
+    let dev_files = get_lua_files_in_path(&packages_path.join("Dev"))
+        .context("Failed to get Lua files in Packages/Dev directory")?;
+
+    packages_files.extend(dev_files);
 
     let mut index_paths = BTreeMap::new();
 
-    for file in files {
+    for file in packages_files {
         let path = file.path();
 
         // Resolve where this module is pointing to in the package index
@@ -84,7 +88,7 @@ pub fn populate_package_registry(
         } else {
             package_lock.version
         };
-        
+
         let package_meta = PackageMeta {
             thunk_name: PackageName(package_name.clone()),
             true_name: true_name.to_owned(),
