@@ -30,9 +30,10 @@ pub static PACKAGE_VERSION_OVERRIDES: phf::Map<&'static str, &'static str> = phf
     "RoactCompat-9c8468d8-8a7220fd" => "17.0.1-rc.16.1",
 };
 
-pub const MIT_LICENSE_PHRASES: [&str; 2] = [
+pub const MIT_LICENSE_PHRASES: [&str; 3] = [
     "licensed under the MIT license",
     "Copyright Node.js contributors. All rights reserved",
+    "Copyright (c) 2013 Forbes Lindesay",
 ];
 
 pub const APACHE_LICENSE_PHRASES: [&str; 1] = ["licensed under the Apache License, Version 2.0"];
