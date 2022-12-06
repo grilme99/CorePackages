@@ -1,0 +1,9 @@
+{
+  "name": "OtterCompat",
+  "tree": {
+    "$path": "Packages/",
+    "OtterCompat": {
+      "$path": "src/"
+    }
+  }
+}

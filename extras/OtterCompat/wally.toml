@@ -1,0 +1,8 @@
+[package]
+name = "grilme99/otter-compat"
+version = "1.0.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+Flipper = 'reselim/flipper@2.0.0'
