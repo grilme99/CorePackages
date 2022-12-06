@@ -68,7 +68,10 @@ impl CorePackageSource for LocalPackageSource {
                 &mut packages_to_write,
                 &package_registry,
                 thunk_name,
-            )?;
+            )
+            .context(format!(
+                "Failed to extract child packages for {thunk_name:?}"
+            ))?;
         }
 
         // Finally, output the modules to the file system
@@ -100,19 +103,21 @@ impl LocalPackageSource {
         package_registry: &'a PackageRegistry,
         thunk_name: &'a PackageName,
     ) -> anyhow::Result<()> {
-        let package = package_registry
-            .get_package(thunk_name)
-            .context(format!("Package {thunk_name:?} does not exist in registry"))?;
+        if let Some(package) = package_registry.get_package(thunk_name) {
+            for thunk_name in &package.dependencies {
+                if packages_to_write.contains_key(thunk_name) {
+                    continue;
+                }
 
-        for thunk_name in &package.dependencies {
-            if packages_to_write.contains_key(thunk_name) {
-                continue;
+                Self::write_dependencies_recursive(
+                    packages_to_write,
+                    package_registry,
+                    thunk_name,
+                )?;
             }
 
-            Self::write_dependencies_recursive(packages_to_write, package_registry, thunk_name)?;
+            packages_to_write.insert(thunk_name, package);
         }
-
-        packages_to_write.insert(thunk_name, package);
 
         Ok(())
     }

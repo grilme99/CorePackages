@@ -3,7 +3,7 @@ use std::{collections::BTreeMap, path::PathBuf};
 use anyhow::Context;
 use console::style;
 
-use crate::domain::{PackageMeta, PackageName};
+use crate::{domain::{PackageMeta, PackageName}, constants::DEPENDENCY_ALIASES};
 
 #[derive(Debug)]
 pub struct PackageRegistry {
@@ -69,6 +69,11 @@ impl PackageRegistry {
         }
 
         for dependency in &package.dependencies {
+            if DEPENDENCY_ALIASES.contains_key(&dependency) {
+                // Skipping license check because the dependency is overridden later on
+                continue;
+            }
+
             let (licensed, unlicensed) = self
                 .is_package_licensed(dependency)
                 .context(format!("Failed to check if {dependency:?} is licensed"))?;
